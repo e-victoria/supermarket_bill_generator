@@ -4,6 +4,7 @@
   "description": "Project to practice typescript, algorithms and jasmine",
   "main": "index.js",
   "scripts": {
+    "build": "tsc public/js/*.ts && webpack",
     "test": "tsc public/js/*.ts && babel-node spec/support/run.js"
   },
   "repository": {
