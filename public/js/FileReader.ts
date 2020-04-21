@@ -28,4 +28,5 @@ export default class FileReader {
 
         return fileMap;
     }
+
 }

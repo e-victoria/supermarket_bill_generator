@@ -7,12 +7,8 @@ describe("FileReader", function () {
     let fileReader;
     let billCalculator;
 
-    beforeEach(function () {
-        fileReader = new FileReader(__dirname + '/prices.csv');
-        billCalculator = new BillCalculator();
-    });
-
     it("should return map with product prices", function () {
+        fileReader = new FileReader(__dirname + '/prices.csv');
         const actual = fileReader.readFile();
 
         const expected = {
@@ -44,6 +40,7 @@ describe("FileReader", function () {
     });
 
     it("should return map total price", function () {
+        billCalculator = new BillCalculator();
         const basket = new Basket();
         const products = [1001, 1001, 3401, 1001, 3401, 3401, 3401, 1001, 1243, 1243];
         basket.put(...products);
