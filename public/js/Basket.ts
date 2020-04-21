@@ -13,6 +13,17 @@ export default class Basket {
         }
     }
 
+    setProducts(barcodes: Array<number>): void {
+        for (let product of barcodes) {
+            if (this.productsList.get(product)) {
+                const newAmount = this.productsList.get(product) + 1;
+                this.productsList.set(product, newAmount);
+            } else {
+                this.productsList.set(product, 1);
+            }
+        }
+    }
+
     getBasket(): Map<number, number> {
         return this.productsList;
     }
