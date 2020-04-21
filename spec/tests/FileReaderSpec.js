@@ -1,11 +1,15 @@
 import FileReader from '../../public/js/FileReader';
+import BillCalculator from '../../public/js/BillCalculator';
+import Basket from '../../public/js/Basket';
 
 describe("FileReader", function () {
 
     let fileReader;
+    let billCalculator;
 
     beforeEach(function () {
-      fileReader = new FileReader(__dirname + '/prices.csv');
+        fileReader = new FileReader(__dirname + '/prices.csv');
+        billCalculator = new BillCalculator();
     });
 
     it("should return map with product prices", function () {
@@ -25,7 +29,7 @@ describe("FileReader", function () {
                     "1": 0.20,
                     "10": 1.90
                 }
-            }, 
+            },
             "3401": {
                 "name": "chocolate",
                 "price": {
@@ -37,6 +41,16 @@ describe("FileReader", function () {
         expect(Object.assign({}, actual)).toEqual(
             jasmine.objectContaining(Object.assign({}, expected))
         );
-      });
-  
-  });
+    });
+
+    it("should return map total price", function () {
+        const basket = new Basket();
+        const products = [1001, 1001, 3401, 1001, 3401, 3401, 3401, 1001, 1243, 1243];
+        basket.put(...products);
+        const actual = billCalculator.calculateBill(basket);
+        const expected = 17;
+
+        expect(actual).toBe(expected);
+    });
+
+});
