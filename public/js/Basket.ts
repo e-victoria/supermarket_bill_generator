@@ -5,22 +5,18 @@ export default class Basket {
         this.productsList = new Map();
     }
 
-    setProduct(barcode: string): void {
-        if (this.productsList[barcode]) {
-            this.productsList[barcode] += 1;
+    setProduct(barcode: number): void {
+        if (this.productsList.get(barcode)) {
+            const newAmount: number = this.productsList.get(barcode) + 1;
+            this.productsList.set(barcode, newAmount);
         } else {
-            this.productsList[barcode] = 1;
+            this.productsList.set(barcode, 1);
         }
     }
 
     setProducts(barcodes: Array<number>): void {
         for (let product of barcodes) {
-            if (this.productsList.get(product)) {
-                const newAmount = this.productsList.get(product) + 1;
-                this.productsList.set(product, newAmount);
-            } else {
-                this.productsList.set(product, 1);
-            }
+            this.setProduct(product);
         }
     }
 
